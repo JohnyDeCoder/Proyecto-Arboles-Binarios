@@ -35,6 +35,84 @@ class ArbolBinario {
         }
     }
 
+    generar() {
+        let temp = this.primero;
+
+        while (temp) {
+            if (temp.cifra === "*" || temp.cifra === "/") {
+                console.log(`Se encontró un ${temp.cifra}`);
+
+                temp.hIzq = temp.ant;
+                console.log(`El término ${temp.ant.cifra} ahora es hijo IZQUIERDO de ${temp.cifra}`);
+                temp.hDer = temp.sig;
+                console.log(`El término ${temp.sig.cifra} ahora es hijo DERECHO de ${temp.cifra}`);
+
+                if (temp.hIzq.cifra === this.primero.cifra || temp.hDer.cifra === this.primero.cifra) {
+                    this.primero = temp;
+                }
+
+                if (temp.sig.sig != null) {
+                    temp.sig.sig.ant = temp;
+                    temp.sig = temp.sig.sig;
+                }
+                else {
+                    temp.sig = null;
+                }
+
+                if (temp.ant.ant != null) {
+                    temp.ant.ant.sig = temp;
+                    temp.ant = temp.ant.ant;
+                }
+                else {
+                    temp.ant = null;
+                }
+
+                console.log(`El hijo IZQUIERDO de ${temp.cifra} es ${temp.hIzq.cifra}`);
+                console.log(`El hijo DERECHO de ${temp.cifra} es ${temp.hDer.cifra}`);
+            }
+            temp = temp.sig;
+        }
+
+        temp = this.primero;
+
+        while (temp) {
+            if (temp.cifra === "+" || temp.cifra === "-") {
+                console.log(`Se encontró un ${temp.cifra}`);
+
+                temp.hIzq = temp.ant;
+                console.log(`El término ${temp.ant.cifra} ahora es hijo IZQUIERDO de ${temp.cifra}`);
+                temp.hDer = temp.sig;
+                console.log(`El término ${temp.sig.cifra} ahora es hijo DERECHO de ${temp.cifra}`);
+
+                if (temp.hIzq.cifra === this.primero.cifra || temp.hDer.cifra === this.primero.cifra) {
+                    this.primero = temp;
+                }
+
+                if (temp.sig.sig != null) {
+                    temp.sig.sig.ant = temp;
+                    temp.sig = temp.sig.sig;
+                }
+                else {
+                    temp.sig = null;
+                }
+
+                if (temp.ant.ant != null) {
+                    temp.ant.ant.sig = temp;
+                    temp.ant = temp.ant.ant;
+                }
+                else {
+                    temp.ant = null;
+                }
+
+                console.log(`El hijo IZQUIERDO de ${temp.cifra} es ${temp.hIzq.cifra}`);
+                console.log(`El hijo DERECHO de ${temp.cifra} es ${temp.hDer.cifra}`);
+            }
+            temp = temp.sig;
+        }
+
+        this.raiz = this.primero;
+    }
+
     listar() {
         let lista = "", temp = this.primero;
 
