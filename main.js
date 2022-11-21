@@ -144,6 +144,33 @@ class ArbolBinario {
         }
     }
 
+    preOrder() { // RID
+        if (!this.raiz) {
+            return ".";
+        }
+        else {
+            return preOrderRec(this.raiz, new Array());
+        }
+
+        function preOrderRec(nodoX, array) {
+            if (nodoX == null) {
+                return; // Recursividad cortado
+            }
+
+            array.push(nodoX.cifra); // R
+
+            if (nodoX.hIzq) { // I
+                preOrderRec(nodoX.hIzq, array);
+            }
+
+            if (nodoX.hDer) { // D
+                preOrderRec(nodoX.hDer, array);
+            }
+
+            return array;
+        }
+    }
+
     listar() {
         let lista = "", temp = this.primero;
 
@@ -162,3 +189,4 @@ miArbol.separarExpresion("1+2+3*4/2");
 console.log(miArbol.listar());
 console.log(miArbol.generar());
 console.log(`InOrder : ${miArbol.inOrder().toString()}`);
+console.log(`PreOrder : ${miArbol.preOrder().toString()}`);
