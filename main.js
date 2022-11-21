@@ -22,6 +22,18 @@ class ArbolBinario {
             this.agregarNodo(new Nodo(expresionVec[i]));
         }
     }
+
+    agregarNodo(cifra) {
+        if (!this.primero) {
+            this.primero = cifra;
+            this.ultimo = cifra;
+        }
+        else {
+            this.ultimo.sig = cifra;
+            cifra.ant = this.ultimo;
+            this.ultimo = cifra;
+        }
+    }
 }
 
 let miArbol = new ArbolBinario();
