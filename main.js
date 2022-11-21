@@ -171,6 +171,33 @@ class ArbolBinario {
         }
     }
 
+    postOrder() { // IDR
+        if (!this.raiz) {
+            return ".";
+        }
+        else {
+            return postOrderRec(this.raiz, new Array());
+        }
+
+        function postOrderRec(nodoX, array) {
+            if (nodoX == null) {
+                return; // Recursividad cortado
+            }
+
+            if (nodoX.hIzq) { // I
+                postOrderRec(nodoX.hIzq, array);
+            }
+
+            if (nodoX.hDer) { // D
+                postOrderRec(nodoX.hDer, array);
+            }
+
+            array.push(nodoX.cifra); // R
+
+            return array;
+        }
+    }
+
     listar() {
         let lista = "", temp = this.primero;
 
@@ -190,3 +217,4 @@ console.log(miArbol.listar());
 console.log(miArbol.generar());
 console.log(`InOrder : ${miArbol.inOrder().toString()}`);
 console.log(`PreOrder : ${miArbol.preOrder().toString()}`);
+console.log(`PostOrder : ${miArbol.postOrder().toString()}`);
