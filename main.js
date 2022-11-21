@@ -16,14 +16,14 @@ class ArbolBinario {
     }
 
     separarExpresion(expresion) {
-        let expresionVec = expresion.split('');
+        let expresionVec = expresion.split(''); // Separación de la expresión por espacios vacíos
 
         for (let i = 0; i < expresionVec.length; i++) {
-            this.agregarNodo(new Nodo(expresionVec[i]));
+            this._agregarNodo(new Nodo(expresionVec[i]));
         }
     }
 
-    agregarNodo(cifra) {
+    _agregarNodo(cifra) {
         if (!this.primero) {
             this.primero = cifra;
             this.ultimo = cifra;
@@ -69,6 +69,8 @@ class ArbolBinario {
 
                 console.log(`El hijo IZQUIERDO de ${temp.cifra} es ${temp.hIzq.cifra}`);
                 console.log(`El hijo DERECHO de ${temp.cifra} es ${temp.hDer.cifra}`);
+
+                console.log("-> " + miArbol.listar());
             }
             temp = temp.sig;
         }
@@ -106,11 +108,40 @@ class ArbolBinario {
 
                 console.log(`El hijo IZQUIERDO de ${temp.cifra} es ${temp.hIzq.cifra}`);
                 console.log(`El hijo DERECHO de ${temp.cifra} es ${temp.hDer.cifra}`);
+
+                console.log("-> " + miArbol.listar());
             }
             temp = temp.sig;
         }
 
         this.raiz = this.primero;
+    }
+
+    inOrder() { // IRD
+        if (!this.raiz) {
+            return ".";
+        }
+        else {
+            return inOrderRec(this.raiz, new Array());
+        }
+
+        function inOrderRec(nodoX, array) {
+            if (nodoX == null) {
+                return; // Recursividad cortado
+            }
+
+            if (nodoX.hIzq) { // I
+                inOrderRec(nodoX.hIzq, array);
+            }
+
+            array.push(nodoX.cifra); // R
+
+            if (nodoX.hDer) { // D
+                inOrderRec(nodoX.hDer, array);
+            }
+
+            return array;
+        }
     }
 
     listar() {
@@ -126,7 +157,8 @@ class ArbolBinario {
 
 let miArbol = new ArbolBinario();
 
+// miArbol.separarExpresion("4-2+3*5-8*3/6");
 miArbol.separarExpresion("1+2+3*4/2");
 console.log(miArbol.listar());
 console.log(miArbol.generar());
-console.log(miArbol.listar());
+console.log(`InOrder : ${miArbol.inOrder().toString()}`);
