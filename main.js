@@ -212,7 +212,6 @@ class ArbolBinario {
         let preOrderVec = this.preOrder(), procVec = new Array();
 
         for (let i = preOrderVec.length - 1; i > -1; i--) {
-            console.log("Ciclando...");
             switch (preOrderVec[i]) {
                 case "+":
                     console.log("Suma encontrada");
@@ -247,6 +246,50 @@ class ArbolBinario {
                     procVec.push(preOrderVec[i]);
                     break;
             }
+            console.log("Ciclando...");
+        }
+        return procVec[0];
+    }
+
+    generarResultadoPostOrder() {
+        let postOrderVec = this.postOrder(), procVec = new Array();
+
+        for (let i = 0; i < postOrderVec.length; i++) {
+            switch (postOrderVec[i]) {
+                case "+":
+                    console.log("Suma encontrada");
+                    console.log(`El resultado de ${parseInt(procVec[procVec.length - 2])} + ${parseInt(procVec[procVec.length - 1])} = ` + (parseInt(procVec[procVec.length - 2]) + parseInt(procVec[procVec.length - 1])));
+                    procVec[procVec.length - 2] = parseInt(procVec[procVec.length - 2]) + parseInt(procVec[procVec.length - 1]);
+                    
+                    procVec.pop();
+                    break;
+                case "-":
+                    console.log("Resta encontrada");
+                    console.log(`El resultado de ${parseInt(procVec[procVec.length - 2])} - ${parseInt(procVec[procVec.length - 1])} = ` + (parseInt(procVec[procVec.length - 2]) - parseInt(procVec[procVec.length - 1])));
+                    procVec[procVec.length - 2] = parseInt(procVec[procVec.length - 2]) - parseInt(procVec[procVec.length - 1]);
+
+                    procVec.pop();
+                    break;
+                case "*":
+                    console.log("Multiplicación encontrada");
+                    console.log(`El resultado de ${parseInt(procVec[procVec.length - 2])} * ${parseInt(procVec[procVec.length - 1])} = ` + (parseInt(procVec[procVec.length - 2]) * parseInt(procVec[procVec.length - 1])));
+                    procVec[procVec.length - 2] = parseInt(procVec[procVec.length - 2]) * parseInt(procVec[procVec.length - 1]);
+
+                    procVec.pop();
+                    break;
+                case "/":
+                    console.log("División encontrada");
+                    console.log(`El resultado de ${parseInt(procVec[procVec.length - 2])} / ${parseInt(procVec[procVec.length - 1])} = ` + (parseInt(procVec[procVec.length - 2]) / parseInt(procVec[procVec.length - 1])));
+                    procVec[procVec.length - 2] = parseInt(procVec[procVec.length - 2]) / parseInt(procVec[procVec.length - 1]);
+
+                    procVec.pop();
+                    break;
+                default:
+                    console.log("Se detectó un número...");
+                    procVec.push(postOrderVec[i]);
+                    break;
+            }
+            console.log("Ciclando...");
         }
         return procVec[0];
     }
@@ -254,11 +297,12 @@ class ArbolBinario {
 
 let miArbol = new ArbolBinario();
 
-// miArbol.separarExpresion("4-2+3*5-8*3/6");
-miArbol.separarExpresion("1+2+3*4/2");
+miArbol.separarExpresion("4-2+3*5-8*3/6");
+// miArbol.separarExpresion("1+2+3*4/2");
 console.log(miArbol.listar());
 console.log(miArbol.generar());
 console.log(`InOrder : ${miArbol.inOrder().toString()}`);
 console.log(`PreOrder : ${miArbol.preOrder().toString()}`);
 console.log(`PostOrder : ${miArbol.postOrder().toString()}`);
-console.log(miArbol.generarResultadoPreOrder());
+console.log(`El resultado de la expresión por PreOrder es: ${miArbol.generarResultadoPreOrder()}`);
+// console.log(`El resultado de la expresión por PostOrder es: ${miArbol.generarResultadoPostOrder()}`);
