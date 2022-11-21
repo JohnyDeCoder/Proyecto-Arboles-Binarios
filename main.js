@@ -34,8 +34,21 @@ class ArbolBinario {
             this.ultimo = cifra;
         }
     }
+
+    listar() {
+        let lista = "", temp = this.primero;
+
+        while (temp) {
+            lista += temp.cifra + " ";
+            temp = temp.sig;
+        }
+        return lista;
+    }
 }
 
 let miArbol = new ArbolBinario();
 
 miArbol.separarExpresion("1+2+3*4/2");
+console.log(miArbol.listar());
+console.log(miArbol.generar());
+console.log(miArbol.listar());
