@@ -207,6 +207,49 @@ class ArbolBinario {
         }
         return lista;
     }
+
+    generarResultadoPreOrder() {
+        let preOrderVec = this.preOrder(), procVec = new Array();
+
+        for (let i = preOrderVec.length - 1; i > -1; i--) {
+            console.log("Ciclando...");
+            switch (preOrderVec[i]) {
+                case "+":
+                    console.log("Suma encontrada");
+                    console.log(`El resultado de ${parseInt(procVec[procVec.length - 1])} + ${parseInt(procVec[procVec.length - 2])} = ` + (parseInt(procVec[procVec.length - 1]) + parseInt(procVec[procVec.length - 2])));
+                    procVec[procVec.length - 2] = parseInt(procVec[procVec.length - 1]) + parseInt(procVec[procVec.length - 2]);
+                    
+                    procVec.pop();
+                    break;
+                case "-":
+                    console.log("Resta encontrada");
+                    console.log(`El resultado de ${parseInt(procVec[procVec.length - 1])} - ${parseInt(procVec[procVec.length - 2])} = ` + (parseInt(procVec[procVec.length - 1]) - parseInt(procVec[procVec.length - 2])));
+                    procVec[procVec.length - 2] = parseInt(procVec[procVec.length - 1]) - parseInt(procVec[procVec.length - 2]);
+
+                    procVec.pop();
+                    break;
+                case "*":
+                    console.log("Multiplicación encontrada");
+                    console.log(`El resultado de ${parseInt(procVec[procVec.length - 1])} * ${parseInt(procVec[procVec.length - 2])} = ` + (parseInt(procVec[procVec.length - 1]) * parseInt(procVec[procVec.length - 2])));
+                    procVec[procVec.length - 2] = parseInt(procVec[procVec.length - 1]) * parseInt(procVec[procVec.length - 2]);
+
+                    procVec.pop();
+                    break;
+                case "/":
+                    console.log("División encontrada");
+                    console.log(`El resultado de ${parseInt(procVec[procVec.length - 1])} / ${parseInt(procVec[procVec.length - 2])} = ` + (parseInt(procVec[procVec.length - 1]) / parseInt(procVec[procVec.length - 2])));
+                    procVec[procVec.length - 2] = parseInt(procVec[procVec.length - 1]) / parseInt(procVec[procVec.length - 2]);
+
+                    procVec.pop();
+                    break;
+                default:
+                    console.log("Se detectó un número...");
+                    procVec.push(preOrderVec[i]);
+                    break;
+            }
+        }
+        return procVec[0];
+    }
 }
 
 let miArbol = new ArbolBinario();
@@ -218,3 +261,4 @@ console.log(miArbol.generar());
 console.log(`InOrder : ${miArbol.inOrder().toString()}`);
 console.log(`PreOrder : ${miArbol.preOrder().toString()}`);
 console.log(`PostOrder : ${miArbol.postOrder().toString()}`);
+console.log(miArbol.generarResultadoPreOrder());
